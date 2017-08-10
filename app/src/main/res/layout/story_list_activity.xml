@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/book_query_text_input"
+                android:id="@+id/story_query_text_input"
                 android:layout_width="@dimen/search_text_entry_width"
                 android:layout_height="wrap_content"
                 android:hint="@string/search_hint"
@@ -31,7 +31,7 @@
                 android:layout_width="@dimen/search_button_width"
                 android:layout_height="@dimen/search_button_height"
                 android:layout_marginLeft="@dimen/search_button_margin_left"
-                android:onClick="getBookList"
+                android:onClick="getStoryList"
                 android:text="@string/search_button" />
         </LinearLayout>
 
@@ -50,13 +50,13 @@
         android:visibility="gone" />
 
     <ListView
-        android:id="@+id/book_list"
+        android:id="@+id/story_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" />
 
     <TextView
-        android:id="@+id/empty_book_list_view"
+        android:id="@+id/empty_story_list_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
