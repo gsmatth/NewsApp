@@ -134,12 +134,11 @@ public final class QueryUtils {
 //                } else {
 //                    JSONArray tempAuthorsJSONArray = tempVolumeInfoObject.getJSONArray("authors");
 //                    authorsList = tempAuthorsJSONArray.join(", ").replaceAll("\"", "");
-                }
 
-                books.add(new Story(authorString, sectionNameString, titleString, publicationDateString, storyUrlString ));
+                stories.add(new Story(authorString, sectionNameString, titleString, publicationDateString, storyUrlString ));
             }
         } catch (JSONException e) {
-            Log.e("QueryUtils", "Problem parsing the book JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the story JSON results", e);
         }
 
         return stories;

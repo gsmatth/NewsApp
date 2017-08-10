@@ -44,7 +44,7 @@ public class Story {
 
     @Override
     public String toString() {
-        return "Story{" + "mAuthor= " + mAuthor + " " +
+        return "Story{ " + "mAuthor= " + mAuthor + " " +
                 "mSectionName= " + mSectionName + " " +
                 "mTitle= " + mTitle + " " +
                 "mPublicationDate= " + mPublicationDate + " " +
