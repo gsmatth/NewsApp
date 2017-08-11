@@ -60,7 +60,7 @@
             style="@style/search_results_heading"
             android:text="Publication Date"/>
         <TextView
-            android:id="@+id/story_Publication_Date"
+            android:id="@+id/story_publication_date"
             style="@style/search_results_text" />
     </LinearLayout>
 

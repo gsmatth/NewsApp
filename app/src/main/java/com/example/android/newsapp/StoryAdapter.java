@@ -10,9 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import static com.example.android.newsapp.R.id.story_author;
+import static com.example.android.newsapp.R.id.story_publication_date;
 import static com.example.android.newsapp.R.id.story_title;
 import static com.example.android.newsapp.R.id.story_section;
-import static com.example.android.newsapp.R.id.story_Publication_Date;
+import static com.example.android.newsapp.R.id.story_publication_date;
 
 /**
  * Created by djp on 8/9/17.
@@ -46,7 +47,7 @@ public class StoryAdapter extends ArrayAdapter<Story> {
         String mSection = currentStoryObject.getSectionName();
         sectionView.setText(mSection);
 
-        TextView publicationDateView = (TextView) listItemView.findViewById(story_Publication_Date);
+        TextView publicationDateView = (TextView) listItemView.findViewById(story_publication_date);
         String mPublicationDate = currentStoryObject.getPublicationDate();
         publicationDateView.setText(mPublicationDate);
 
