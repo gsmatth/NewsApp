@@ -33,7 +33,8 @@
             android:text="Author"/>
         <TextView
             android:id="@+id/story_author"
-            style="@style/search_results_text" />
+            style="@style/search_results_text"
+            android:paddingLeft="24dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -47,7 +48,8 @@
             android:text="Section"/>
         <TextView
             android:id="@+id/story_section"
-            style="@style/search_results_text" />
+            style="@style/search_results_text"
+            android:paddingLeft="24dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -61,7 +63,8 @@
             android:text="Publication Date"/>
         <TextView
             android:id="@+id/story_publication_date"
-            style="@style/search_results_text" />
+            style="@style/search_results_text"
+            android:paddingLeft="24dp"/>
     </LinearLayout>
 
 </LinearLayout>

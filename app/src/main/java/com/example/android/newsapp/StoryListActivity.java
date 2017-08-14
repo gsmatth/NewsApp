@@ -8,6 +8,7 @@ import android.content.Loader;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,7 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
 
     @Override
     public Loader<ArrayList<Story>> onCreateLoader(int id, Bundle args){
+        Log.v("StoryListActivity", "    Loader being constructed");
         return new StoryLoader(StoryListActivity.this);
     }
 
@@ -75,12 +77,17 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
             int searchId = R.id.story_query_text_input;
             EditText searchTermObject = (EditText) findViewById(searchId);
             String searchTermString = searchTermObject.getText().toString();
-            String requestUrl = BASE_BOOK_QUERY_URL + searchTermObject;
+            Log.v("StoryListActivity", "searchTermString: " + searchTermString);
+            String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
+            Log.v("StoryListActivity", "value of requestUrl " + requestUrl);
             STORY_QUERY_URL = requestUrl;
+            Log.v("StoryListActivity", "value of STORY QUERY URL   " + STORY_QUERY_URL);
             Uri baseUri = Uri.parse(STORY_QUERY_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
+            uriBuilder.appendQueryParameter("show-tags", "contributor");
             uriBuilder.appendQueryParameter("api-key", testApiKey);
             STORY_QUERY_URL = uriBuilder.toString();
+            Log.v("StoryListActivity", "value of story query url after uri builder  " + STORY_QUERY_URL);
             getLoaderManager().restartLoader(0, null, this);
         } else {
             final ListView storyListView = (ListView) findViewById(R.id.story_list);
