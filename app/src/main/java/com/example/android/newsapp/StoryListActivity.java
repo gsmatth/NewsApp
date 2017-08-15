@@ -2,6 +2,7 @@ package com.example.android.newsapp;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.content.Loader;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -92,8 +94,8 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
         } else {
             final ListView storyListView = (ListView) findViewById(R.id.story_list);
             storyListView.setVisibility(View.GONE);
-            final TextView noConneectivityView = (TextView) findViewById(R.id.no_connectivity_view);
-            noConneectivityView.setVisibility(View.VISIBLE);
+            final TextView noConnectivityView = (TextView) findViewById(R.id.no_connectivity_view);
+            noConnectivityView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -102,5 +104,13 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
         storyListView.setEmptyView(findViewById(R.id.empty_story_list_view));
         final StoryAdapter itemsAdapter = new StoryAdapter(StoryListActivity.this, stories);
         storyListView.setAdapter(itemsAdapter);
+
+    }
+    public void openWebPage(String url){
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
     }
 }
