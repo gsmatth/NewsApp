@@ -13,7 +13,6 @@ import static com.example.android.newsapp.R.id.story_author;
 import static com.example.android.newsapp.R.id.story_publication_date;
 import static com.example.android.newsapp.R.id.story_title;
 import static com.example.android.newsapp.R.id.story_section;
-import static com.example.android.newsapp.R.id.story_publication_date;
 
 /**
  * Created by djp on 8/9/17.
@@ -21,15 +20,15 @@ import static com.example.android.newsapp.R.id.story_publication_date;
 
 public class StoryAdapter extends ArrayAdapter<Story> {
 
-    public StoryAdapter(Context context, ArrayList<Story> stories){
+    public StoryAdapter(Context context, ArrayList<Story> stories) {
         super(context, 0, stories);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
         View listItemView = convertView;
 
-        if(convertView == null){
+        if (convertView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.story_list_item, parent, false);
         }
 

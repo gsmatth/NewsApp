@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public final class QueryUtils {
     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
+
     //an empty constructor makes sure that the class is not going to be initialized
     private QueryUtils() {
 
@@ -97,16 +98,12 @@ public final class QueryUtils {
     }
 
     public static ArrayList<Story> extractStories(String storyData) {
-        Log.v("QueryUtils", "entered extractStories");
         ArrayList<Story> stories = new ArrayList<>();
 
         try {
             JSONObject storyObject = new JSONObject(storyData);
-            Log.v("QueryUtils", " \n\n\n value of storyObject in extract Stories   " + storyObject);
             JSONObject responseObject = storyObject.getJSONObject("response");
-            Log.v("QueryUtils", " \n\n\n value of responseObject    " + responseObject);
             JSONArray items = responseObject.getJSONArray("results");
-            Log.v("QueryUtils", " \n\n\n ITEMS ITEMS    ITEMS    ITEMS     ITEMS     ITEMS     ITEMS    ITEMS  " + items);
             String authorString = "";
             String sectionNameString = "";
             String titleString = "";
@@ -117,8 +114,7 @@ public final class QueryUtils {
             for (int i = 0; i < items.length(); i++) {
                 JSONObject itemsObject = items.getJSONObject(i);
                 JSONArray tagsArray = itemsObject.getJSONArray("tags");
-                Log.v("QueryUtils", " \n\n\n\n value of tags array:  " + tagsArray + " \n\n\n");
-                if(tagsArray.length() >= 1) {
+                if (tagsArray.length() >= 1) {
                     tagsObject = tagsArray.getJSONObject(0);
                 } else {
                     tagsObject = new JSONObject();
@@ -137,27 +133,26 @@ public final class QueryUtils {
                 }
                 if (!itemsObject.has("webUrl")) {
                     storyUrlString = "No Story URL Listed";
-                }else {
+                } else {
                     storyUrlString = itemsObject.getString("webUrl");
                 }
-                if(!itemsObject.has("webPublicationDate")){
+                if (!itemsObject.has("webPublicationDate")) {
                     publicationDateString = "No publication date Listed";
                 } else {
                     publicationDateString = itemsObject.getString("webPublicationDate").substring(0, 10);
                 }
-                if(!tagsObject.has("webTitle")){
+                if (!tagsObject.has("webTitle")) {
                     authorString = "No author listed";
                 } else {
                     authorString = tagsObject.getString("webTitle");
                 }
 
 
-                stories.add(new Story(authorString, sectionNameString, titleString, publicationDateString, storyUrlString ));
+                stories.add(new Story(authorString, sectionNameString, titleString, publicationDateString, storyUrlString));
             }
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the story JSON results", e);
         }
-        Log.v("QueryUtils", " \n\n\n value of stories:  " + stories);
 
         return stories;
     }
