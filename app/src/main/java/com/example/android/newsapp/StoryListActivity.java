@@ -23,10 +23,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoryListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Story>> {
+public class StoryListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Story>>{
 
     public static String STORY_QUERY_URL = null;
     private ProgressBar mProgress;
+    StoryAdapter itemsAdapter;
 
 
     @Override
@@ -74,19 +75,18 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
             loadProgressIndicator.setVisibility(View.VISIBLE);
             mProgress = loadProgressIndicator;
 
-            String BASE_BOOK_QUERY_URL  = "https://content.guardianapis.com/search?q=";
+            String BASE_BOOK_QUERY_URL  = "https://content.guardianapis.com/search?";
             String testApiKey = "test";
+            String showTags = "contributor";
+            String contentSearchTerm;
+
             int searchId = R.id.story_query_text_input;
             EditText searchTermObject = (EditText) findViewById(searchId);
-            String searchTermString = searchTermObject.getText().toString();
-            Log.v("StoryListActivity", "searchTermString: " + searchTermString);
-            String requestUrl = BASE_BOOK_QUERY_URL + searchTermString;
-            Log.v("StoryListActivity", "value of requestUrl " + requestUrl);
-            STORY_QUERY_URL = requestUrl;
-            Log.v("StoryListActivity", "value of STORY QUERY URL   " + STORY_QUERY_URL);
-            Uri baseUri = Uri.parse(STORY_QUERY_URL);
+            contentSearchTerm = searchTermObject.getText().toString();
+            Uri baseUri = Uri.parse(BASE_BOOK_QUERY_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
-            uriBuilder.appendQueryParameter("show-tags", "contributor");
+            uriBuilder.appendQueryParameter("q", contentSearchTerm);
+            uriBuilder.appendQueryParameter("show-tags", showTags);
             uriBuilder.appendQueryParameter("api-key", testApiKey);
             STORY_QUERY_URL = uriBuilder.toString();
             Log.v("StoryListActivity", "value of story query url after uri builder  " + STORY_QUERY_URL);
@@ -102,10 +102,18 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
     private void updateUI(ArrayList stories){
         final ListView storyListView = (ListView) findViewById(R.id.story_list);
         storyListView.setEmptyView(findViewById(R.id.empty_story_list_view));
-        final StoryAdapter itemsAdapter = new StoryAdapter(StoryListActivity.this, stories);
+        itemsAdapter = new StoryAdapter(StoryListActivity.this, stories);
         storyListView.setAdapter(itemsAdapter);
-
+        storyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Story storyItem = itemsAdapter.getItem(position);
+                String storyUrl = storyItem.getStoryUrl();
+                openWebPage(storyUrl);
+            }
+        });
     }
+
     public void openWebPage(String url){
         Uri webpage = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
