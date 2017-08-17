@@ -6,7 +6,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import static com.example.android.newsapp.StoryListActivity.STORY_QUERY_URL;
+import static com.example.android.newsapp.StoryListActivity.storyQueryUrl;
 
 /**
  * Created by djp on 8/9/17.
@@ -24,10 +24,10 @@ public class StoryLoader extends AsyncTaskLoader<ArrayList<Story>> {
 
     @Override
     public ArrayList<Story> loadInBackground() {
-        if (STORY_QUERY_URL == null) {
+        if (storyQueryUrl == null) {
             return null;
         }
-        final String storyData = QueryUtils.fetchStoryData(STORY_QUERY_URL);
+        final String storyData = QueryUtils.fetchStoryData(storyQueryUrl);
         return QueryUtils.extractStories(storyData);
     }
 }

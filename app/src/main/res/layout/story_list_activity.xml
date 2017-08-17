@@ -59,7 +59,6 @@
         android:id="@+id/empty_story_list_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:text="@string/empty_search_results"
         android:textSize="24sp"
         android:visibility="gone" />
@@ -68,7 +67,6 @@
         android:id="@+id/no_connectivity_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:text="@string/no_connectivity_warning"
         android:textSize="24sp"
         android:visibility="gone" />

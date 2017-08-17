@@ -20,9 +20,8 @@ import java.util.ArrayList;
 
 public class StoryListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Story>> {
 
-    public static String STORY_QUERY_URL = null;
-    private ProgressBar mProgress;
-    StoryAdapter itemsAdapter;
+    public static String storyQueryUrl = null;
+    private StoryAdapter itemsAdapter;
 
 
     @Override
@@ -67,11 +66,10 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
             noConnectivityView.setVisibility(View.GONE);
             ProgressBar loadProgressIndicator = (ProgressBar) findViewById(R.id.loading_spinner);
             loadProgressIndicator.setVisibility(View.VISIBLE);
-            mProgress = loadProgressIndicator;
 
-            String BASE_BOOK_QUERY_URL = "https://content.guardianapis.com/search?";
-            String testApiKey = "test";
-            String showTags = "contributor";
+            final String BASE_BOOK_QUERY_URL = "https://content.guardianapis.com/search?";
+            final String TEST_API_KEY = "test";
+            final String SHOW_TAGS = "contributor";
             String contentSearchTerm;
 
             int searchId = R.id.story_query_text_input;
@@ -80,9 +78,9 @@ public class StoryListActivity extends AppCompatActivity implements LoaderManage
             Uri baseUri = Uri.parse(BASE_BOOK_QUERY_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
             uriBuilder.appendQueryParameter("q", contentSearchTerm);
-            uriBuilder.appendQueryParameter("show-tags", showTags);
-            uriBuilder.appendQueryParameter("api-key", testApiKey);
-            STORY_QUERY_URL = uriBuilder.toString();
+            uriBuilder.appendQueryParameter("show-tags", SHOW_TAGS);
+            uriBuilder.appendQueryParameter("api-key", TEST_API_KEY);
+            storyQueryUrl = uriBuilder.toString();
             getLoaderManager().restartLoader(0, null, this);
         } else {
             final ListView storyListView = (ListView) findViewById(R.id.story_list);
